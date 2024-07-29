@@ -16,7 +16,7 @@ const about = {
     { fieldName: 'Email', fieldValue: 'amanpreetsinghjhiwant7@gmail.com' },
     { fieldName: 'Phone', fieldValue: '+91 9041232480' },
     { fieldName: 'Location', fieldValue: 'Punjab, India' },
-    { fieldName: 'Website', fieldValue: 'www.reallygreatsite.com' }
+    { fieldName: 'Website', fieldValue: 'https://portfolio1-omega-one.vercel.app/' }
   ]
 };
 
