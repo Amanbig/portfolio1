@@ -40,6 +40,20 @@ const projects = [
     image: '/projects/project2/homepage.png',
     github: 'https://github.com/Amanbig/Gemini_app'
   },
+  {
+    num: '03',
+    category: "Full Stack",
+    title: 'URL Short Generator',
+    description: "A versatile application that allows users to generate short url for their websites links according to what the link should be like and also keep track of uses of links",
+    stack: [
+      { name: "EJS" },
+      { name: "Node.Js" },
+      { name: "Express.Js" },
+      { name: "Mongodb" }
+    ],
+    image: '/projects/project3/image.png',
+    github: 'https://github.com/Amanbig/URL-SHORT'
+  },
 ];
 
 function Work() {
