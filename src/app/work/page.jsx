@@ -17,11 +17,11 @@ const projects = [
     title: 'Aora',
     description: "An app that allows users to authenticate, save posts that include a video with a thumbnail image, title, and prompt description. Users can also search for posts.",
     stack: [
-      { name: "React Native" },
+      { name: "React-Native" },
       { name: "JavaScript" },
       { name: "Node.js" },
       { name: "Appwrite" },
-      { name: "Tailwind CSS" }
+      { name: "Tailwind-CSS" }
     ],
     image: '/projects/project1/images.jpg',
     github: 'https://github.com/Amanbig/Aora'
@@ -56,20 +56,20 @@ function Work() {
       animate={{ opacity: 1, transition: { delay: 2.4, duration: 0.4, ease: 'easeIn' } }}
       className='min-h-[80vh] flex flex-col justify-center py-12 xl:px-0'
     >
-      <div className='container mx-auto'>
+      <div className='container mx-auto px-4'>
         <div className='flex flex-col xl:flex-row xl:gap-[30px]'>
           <div className='w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none'>
-            <div className='flex flex-col gap-[30px] h-[50%]'>
-              <div className='text-8xl leading-none font-extrabold text-transparent text-outline'>
+            <div className='flex flex-col gap-[20px] xl:gap-[30px] h-full xl:h-[50%]'>
+              <div className='text-5xl xl:text-8xl leading-none font-extrabold text-transparent text-outline'>
                 {project.num}
               </div>
-              <h2 className='text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize'>
+              <h2 className='text-[32px] xl:text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize'>
                 {project.category} project
               </h2>
               <p className='text-white/60'>{project.description}</p>
-              <ul className='flex gap-2'>
+              <ul className='flex gap-2 flex-wrap'>
                 {project.stack.map((item, index) => (
-                  <li key={index} className='text-xl text-accent'>
+                  <li key={index} className='text-base xl:text-xl text-accent'>
                     {item.name}
                     {index !== project.stack.length - 1 && ","}
                   </li>
@@ -80,8 +80,8 @@ function Work() {
                 <Link href={project.github}>
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
-                      <TooltipTrigger className='w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group'>
-                        <BsGithub className='text-white text-3xl group-hover:text-accent' />
+                      <TooltipTrigger className='w-[50px] h-[50px] xl:w-[70px] xl:h-[70px] rounded-full bg-white/5 flex justify-center items-center group'>
+                        <BsGithub className='text-white text-2xl xl:text-3xl group-hover:text-accent' />
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>Github project</p>
@@ -97,7 +97,7 @@ function Work() {
               spaceBetween={30}
               slidesPerView={1}
               onSlideChange={handleSlideChange}
-              className='relative h-[460px] xl:h-[520px] w-full overflow-hidden'
+              className='relative h-[320px] xl:h-[460px] w-full overflow-hidden'
             >
               {projects.map((project, index) => (
                 <SwiperSlide key={index} className='w-full flex items-center justify-center'>
