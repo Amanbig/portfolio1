@@ -54,6 +54,18 @@ const projects = [
     image: '/projects/project3/image.png',
     github: 'https://github.com/Amanbig/URL-SHORT'
   },
+  {
+    num: '04',
+    category: "Frontend",
+    title: 'Calculator',
+    description: "This the samsung Calculator clone App which is a modern and versatile calculator built with Flutter, designed to handle both basic and advanced mathematical operations. The app features a user-friendly interface with support for scientific functions, power operations, and special constants.",
+    stack: [
+      { name: "Dart" },
+      { name: "Flutter" },
+    ],
+    image: '/projects/project4/image2.png',
+    github: 'https://github.com/Amanbig/samsung_calculator_clone/'
+  },
 ];
 
 function Work() {
