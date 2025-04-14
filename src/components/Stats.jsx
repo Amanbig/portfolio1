@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import axios from 'axios';
 
+
 function Stats() {
     const [stats, setStats] = useState([
         { num: 0, text: "Projects Completed", loading: true },
