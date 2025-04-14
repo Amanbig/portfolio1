@@ -24,9 +24,10 @@ const experience = {
   title: 'Professional Experience',
   description: 'Contributed to various open-source projects, participated in Hacktoberfest, and developed applications using advanced technologies.',
   items: [
-    { company: "HacktoberFest", position: "Participated in Open source Contributions", duration: "2021 - Present" },
+    { company: "Celebrare", position: "Worked on main IOS Celebrare app and Wow invite app (Internship)", duration: "Dec 2024 - March 2025" },
     { company: "Google", position: "Google’s Gemini API Competition", duration: "2024" },
-    { company: "Government of India", position: "Smart India Hackathon", duration: "2023" }
+    { company: "Government of India", position: "Smart India Hackathon", duration: "2023" },
+    { company: "HacktoberFest", position: "Participated in Open source Contributions", duration: "2021 - Present" },
   ]
 };
 
