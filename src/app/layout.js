@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={jetbrainsMono.className}>
+        <div className="fixed inset-0 z-[-1] bg-grid pointer-events-none" />
         <Header />
         <StairEffect />
         <PageTransition>

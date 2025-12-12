@@ -17,27 +17,33 @@ const projects = portfolioData.projects;
 
 // Reusable components
 const ProjectHeader = ({ num, category, title }) => (
-  <div className="flex flex-col gap-2">
-    <span className="text-5xl md:text-6xl xl:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent to-white">
-      {num}
-    </span>
+  <div className="flex flex-col gap-2 font-mono">
+    <div className="text-5xl md:text-6xl xl:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent to-white opacity-80">
+      <span className="text-white/30 text-4xl mr-2">//</span>{num}
+    </div>
     <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-white group-hover:text-accent transition-all duration-300 capitalize">
-      {category} Project: {title}
+      <span className="text-accent">&lt;</span>{title} <span className="text-accent">/&gt;</span>
     </h2>
+    <p className="text-white/60 text-sm">{category} Project</p>
   </div>
 );
 
 const ProjectDetails = ({ description, stack, github }) => (
-  <div className="flex flex-col gap-4">
-    <p className="text-white/70 text-sm md:text-base">{description}</p>
-    <ul className="flex flex-wrap gap-2">
+  <div className="flex flex-col gap-4 font-mono">
+    <div className="text-white/70 text-sm md:text-base bg-[#1e1e1e] p-4 rounded border border-white/10 relative mt-2">
+      <span className="absolute -top-3 left-4 bg-[#1e1e1e] px-2 text-xs text-accent border border-white/10 rounded">/* Description */</span>
+      {description}
+    </div>
+
+    <div className="text-sm md:text-base text-accent flex flex-wrap items-center gap-1">
+      <span className="text-pink-500">const</span> <span className="text-blue-400">stack</span> = <span className="text-yellow-300">[</span>
       {stack.map((tech, index) => (
-        <li key={index} className="text-accent text-sm md:text-base">
-          {tech}
-          {index < stack.length - 1 && ','}
-        </li>
+        <span key={index} className="text-green-400">
+          "{tech}"{index < stack.length - 1 && <span className="text-white">, </span>}
+        </span>
       ))}
-    </ul>
+      <span className="text-yellow-300">]</span>;
+    </div>
     <div className="border-t border-white/20 pt-4">
       <Link href={github} aria-label={`View ${github.split('/').pop()} on GitHub`}>
         <TooltipProvider delayDuration={100}>

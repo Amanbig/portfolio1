@@ -10,7 +10,8 @@ export const portfolioData = {
         address: 'Punjab, India 140301',
         role: 'Full Stack Developer',
         bio: 'I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.',
-        resumeUrl: '/resume/Amanpreet_singh.pdf'
+        resumeUrl: '/resume/Amanpreet_singh.pdf',
+        photo: '/assets/photo-removebg-preview.png'
     },
 
     navLinks: [

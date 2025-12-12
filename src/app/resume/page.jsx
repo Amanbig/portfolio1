@@ -12,8 +12,13 @@ const { about, experience, education, skills } = portfolioData.resume;
 
 // Reusable components
 const SectionHeader = ({ title, description }) => (
-  <div className="flex flex-col gap-4 text-center xl:text-left">
-    <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold">{title}</h2>
+  <div className="flex flex-col gap-4 text-center xl:text-left font-mono">
+    <div className="text-sm text-accent opacity-80">
+      <span className="text-white/50">~/portfolio/</span>{title.toLowerCase().replace(" ", "_")}
+    </div>
+    <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold flex items-center justify-center xl:justify-start gap-2">
+      <span className="text-accent text-xl animate-pulse">$</span> {title}
+    </h2>
     <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{description}</p>
   </div>
 );
@@ -22,9 +27,9 @@ const ExperienceEducationCard = ({ item, type }) => (
   <motion.li
     whileHover={{ scale: 1.02, backgroundColor: "#27272c" }}
     transition={{ duration: 0.3 }}
-    className="bg-[#232329] h-[184px] py-6 px-6 md:px-8 rounded-xl flex flex-col justify-center items-center lg:items-start gap-2 cursor-pointer"
+    className="bg-[#232329] h-[184px] py-6 px-6 md:px-8 rounded-xl flex flex-col justify-center items-center lg:items-start gap-2 cursor-pointer font-mono border-l-2 border-transparent hover:border-accent"
   >
-    <span className="text-accent text-sm md:text-base">{item.duration}</span>
+    <span className="text-accent text-sm md:text-base font-bold">// {item.duration}</span>
     <h3 className="text-base md:text-lg font-medium max-w-[260px] min-h-[40px] text-center lg:text-left">
       {type === 'experience' ? item.position : item.degree}
     </h3>
@@ -42,7 +47,8 @@ const SkillCard = ({ skill }) => (
   >
     <TooltipProvider delayDuration={100}>
       <Tooltip>
-        <TooltipTrigger className="w-full h-[100px] md:h-[120px] bg-[#232329] rounded-xl flex justify-center items-center group">
+        <TooltipTrigger className="w-full h-[100px] md:h-[120px] bg-[#232329] rounded-xl flex justify-center items-center group relative overflow-hidden">
+          <div className="absolute top-2 right-2 text-xs text-white/20 font-mono">.{skill.name.toLowerCase()}</div>
           <div className="text-4xl md:text-5xl group-hover:text-accent transition-all duration-300">{skill.icon}</div>
         </TooltipTrigger>
         <TooltipContent className="bg-[#232329] text-white p-2 rounded">
@@ -54,14 +60,16 @@ const SkillCard = ({ skill }) => (
 );
 
 const AboutInfo = ({ info }) => (
-  <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 max-w-[620px] mx-auto xl:mx-0">
+  <div className="max-w-[620px] mx-auto xl:mx-0 font-mono text-sm md:text-base bg-[#1e1e1e] p-6 rounded border border-white/10 relative shadow-xl">
+    <div className="text-yellow-300">{"{"}</div>
     {info.map((item, index) => (
-      <li key={index} className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-2">
-        <span className="text-white/60 font-medium">{item.fieldName}:</span>
-        <span className="text-base md:text-lg break-all">{item.fieldValue}</span>
-      </li>
+      <div key={index} className="pl-6 md:pl-8 my-1">
+        <span className="text-blue-300">"{item.fieldName}"</span>: <span className="text-green-400">"{item.fieldValue}"</span>
+        {index < info.length - 1 && <span className="text-white">,</span>}
+      </div>
     ))}
-  </ul>
+    <div className="text-yellow-300">{"}"}</div>
+  </div>
 );
 
 function Resume() {
