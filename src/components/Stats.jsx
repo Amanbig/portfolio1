@@ -5,26 +5,32 @@ import CountUp from 'react-countup';
 import axios from 'axios';
 
 
+import { portfolioData } from "@/data/portfolio";
+
 function Stats() {
-    const [stats, setStats] = useState([
-        { num: 0, text: "Projects Completed", loading: true },
-        { num: 0, text: "Technologies Mastered", loading: true },
-        { num: 0, text: "Code Commits", loading: true },
-        { num: 0, text: "Pull Requests", loading: true },
-        { num: 0, text: "Stars Received", loading: true },
-        { num: 0, text: "Lines of Code", loading: true, suffix: "k" },
-    ]);
+    const [stats, setStats] = useState(portfolioData.stats.items.map(item => ({
+        ...item,
+        num: 0,
+        loading: true
+    })));
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Expanded list of technologies
-    const technologies = [
-        'JavaScript', 'React', 'Next.js', 'Node.js', 'TypeScript',
-        'Python', 'Tailwind CSS', 'Git', 'HTML', 'CSS', 'MongoDB',
-        'Express.js', 'SQL', 'GraphQL', 'Docker', 'AWS', 'Jest'
-    ];
+    // Technologies definition from config
+    const technologies = portfolioData.stats.technologies;
 
     useEffect(() => {
+        // Check configuration first
+        if (!portfolioData.stats.useGithub) {
+            setStats(portfolioData.stats.items.map(item => ({
+                ...item,
+                num: item.value || 0,
+                loading: false
+            })));
+            setIsLoading(false);
+            return;
+        }
+
         const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
         const GITHUB_USERNAME = 'Amanbig';
         const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN; // Optional: Add to .env.local
@@ -91,8 +97,13 @@ function Stats() {
                 setError(null);
             } catch (err) {
                 console.error('Error fetching GitHub stats:', err);
-                setError('Failed to fetch latest stats. Showing cached or fallback values.');
-                setStats(prev => prev.map(stat => ({ ...stat, loading: false })));
+                setError(null); // Silent fail to manual data
+                // Fallback to manual data on error
+                setStats(portfolioData.stats.items.map(item => ({
+                    ...item,
+                    num: item.value || 0,
+                    loading: false
+                })));
             } finally {
                 setIsLoading(false);
             }
@@ -127,14 +138,20 @@ function Stats() {
         };
 
         const updateStats = (data) => {
-            setStats([
-                { num: data.repoCount, text: "Projects Completed", loading: false },
-                { num: technologies.length, text: "Technologies Mastered", loading: false },
-                { num: data.commitCount, text: "Code Commits", loading: false },
-                { num: data.pullCount, text: "Pull Requests", loading: false },
-                { num: data.starCount, text: "Stars Received", loading: false },
-                { num: data.linesOfCode, text: "Lines of Code", loading: false, suffix: "k" },
-            ]);
+            const statsValues = {
+                "Projects Completed": data.repoCount,
+                "Technologies Mastered": technologies.length,
+                "Code Commits": data.commitCount,
+                "Pull Requests": data.pullCount,
+                "Stars Received": data.starCount,
+                "Lines of Code": data.linesOfCode
+            };
+
+            setStats(portfolioData.stats.items.map(item => ({
+                ...item,
+                num: statsValues[item.text] || 0,
+                loading: false
+            })));
         };
 
         fetchGitHubStats();
@@ -152,7 +169,7 @@ function Stats() {
                     {stats.map((item, index) => (
                         <div
                             key={index}
-                            className="flex flex-col items-center p-6 bg-gray-800/50 rounded-xl backdrop-blur-sm hover:bg-gray-800/70 transition-colors"
+                            className={`flex flex-col items-center p-6 rounded-xl transition-all duration-300 glass hover-glow ${item.loading ? 'opacity-50' : 'opacity-100'}`}
                         >
                             {item.loading || isLoading ? (
                                 <div className="animate-pulse bg-gray-600 h-12 w-24 rounded mb-2"></div>

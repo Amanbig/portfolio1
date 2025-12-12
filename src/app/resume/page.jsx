@@ -1,70 +1,14 @@
 "use client";
 
 import React from 'react';
-import { FaHtml5, FaCss3, FaJs, FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiTailwindcss, SiNextdotjs, SiFlutter, SiPython, SiCplusplus, SiUnity, SiBlender } from 'react-icons/si';
+import { portfolioData } from "@/data/portfolio";
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 // Data objects
-const about = {
-  title: 'About Me',
-  description:
-    "I'm a passionate developer from India, skilled in web, mobile, and game development. My journey in tech is driven by curiosity and a commitment to building impactful solutions.",
-  info: [
-    { fieldName: 'Name', fieldValue: 'Amanpreet Singh' },
-    { fieldName: 'Email', fieldValue: 'amanpreetsinghjhiwant7@gmail.com' },
-    { fieldName: 'Phone', fieldValue: '+91 9041232480' },
-    { fieldName: 'Location', fieldValue: 'Punjab, India' },
-  ],
-};
-
-const experience = {
-  title: 'Professional Experience',
-  description:
-    'Contributed to open-source projects, hackathons, and professional internships, leveraging modern technologies to deliver robust applications.',
-  items: [
-    {
-      company: 'Celebrare',
-      position: 'iOS App Development Intern (Celebrare & Wow Invite Apps)',
-      duration: 'Dec 2024 - Mar 2025',
-    },
-    { company: 'Google', position: 'Gemini API Competition Participant', duration: '2024' },
-    { company: 'Government of India', position: 'Smart India Hackathon Participant', duration: '2023' },
-    { company: 'HacktoberFest', position: 'Open Source Contributor', duration: '2021 - Present' },
-  ],
-};
-
-const education = {
-  title: 'Education',
-  description: 'Pursued a B.E. in Computer Science while actively participating in hackathons and open-source communities.',
-  items: [
-    { institution: 'Chandigarh College of Engineering and Technology', degree: 'B.E. in Computer Science', duration: '2021 - 2025' },
-    { institution: 'Shishu Niketan Model Public School', degree: 'Intermediate (+2)', duration: '2018 - 2020' },
-    { institution: 'Lawrence Public Senior Secondary School', degree: 'Matriculation', duration: '2017 - 2018' },
-  ],
-};
-
-const skills = {
-  title: 'Technical Skills',
-  description: 'Proficient in modern programming languages, frameworks, and tools for web, mobile, and game development.',
-  skillList: [
-    { icon: <FaHtml5 />, name: 'HTML5' },
-    { icon: <FaCss3 />, name: 'CSS3' },
-    { icon: <FaJs />, name: 'JavaScript' },
-    { icon: <FaReact />, name: 'React' },
-    { icon: <FaNodeJs />, name: 'Node.js' },
-    { icon: <SiTailwindcss />, name: 'Tailwind CSS' },
-    { icon: <SiNextdotjs />, name: 'Next.js' },
-    { icon: <SiFlutter />, name: 'Flutter' },
-    { icon: <SiPython />, name: 'Python' },
-    { icon: <SiCplusplus />, name: 'C++' },
-    { icon: <SiUnity />, name: 'Unity' },
-    { icon: <SiBlender />, name: 'Blender' },
-  ],
-};
+const { about, experience, education, skills } = portfolioData.resume;
 
 // Reusable components
 const SectionHeader = ({ title, description }) => (
@@ -75,7 +19,11 @@ const SectionHeader = ({ title, description }) => (
 );
 
 const ExperienceEducationCard = ({ item, type }) => (
-  <li className="bg-[#232329] h-[184px] py-6 px-6 md:px-8 rounded-xl flex flex-col justify-center items-center lg:items-start gap-2">
+  <motion.li
+    whileHover={{ scale: 1.02, backgroundColor: "#27272c" }}
+    transition={{ duration: 0.3 }}
+    className="bg-[#232329] h-[184px] py-6 px-6 md:px-8 rounded-xl flex flex-col justify-center items-center lg:items-start gap-2 cursor-pointer"
+  >
     <span className="text-accent text-sm md:text-base">{item.duration}</span>
     <h3 className="text-base md:text-lg font-medium max-w-[260px] min-h-[40px] text-center lg:text-left">
       {type === 'experience' ? item.position : item.degree}
@@ -84,11 +32,14 @@ const ExperienceEducationCard = ({ item, type }) => (
       <span className="w-2 h-2 rounded-full bg-accent" />
       <p className="text-white/60 text-sm md:text-base">{type === 'experience' ? item.company : item.institution}</p>
     </div>
-  </li>
+  </motion.li>
 );
 
 const SkillCard = ({ skill }) => (
-  <li>
+  <motion.li
+    whileHover={{ scale: 1.1 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger className="w-full h-[100px] md:h-[120px] bg-[#232329] rounded-xl flex justify-center items-center group">
@@ -99,7 +50,7 @@ const SkillCard = ({ skill }) => (
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  </li>
+  </motion.li>
 );
 
 const AboutInfo = ({ info }) => (

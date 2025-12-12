@@ -11,69 +11,9 @@ import Image from 'next/image';
 import WorkSliderBtns from '@/components/WorkSliderBtns';
 
 // Project data
-const projects = [
-  {
-    num: '01',
-    category: 'Full Stack',
-    title: 'Rag based Chatbot for JAC Chandigarh',
-    description:
-      'A chatbot built with the RAG (Retrieval-Augmented Generation) approach, leveraging the power of Langchain. (Currently only code for frontend in github)',
-    stack: ['Next', 'React', 'Node.js', 'Shadcn UI', 'FastAPI', 'Langchain', 'OpenAI', 'OpenRouter'],
-    image: '/projects/project5/image.png',
-    github: 'https://github.com/Amanbig/jac_chat_bot',
-  },
-  {
-    num: '02',
-    category: 'Full Stack',
-    title: 'Meeting Summarizer',
-    description:
-      'This project is a Meetings Summarizer built with FastAPI on the backend and a React frontend. It allows users to upload video or audio files, transcribe content, summarize it, ask contextual questions, and convert summaries to audio.',
-    stack: ['Next', 'React', 'Node.js', 'Shadcn UI', 'FastAPI', 'Langchain', 'GROQ AI', 'Speech TO Text'],
-    image: '/projects/project6/image.png',
-    github: 'https://github.com/Amanbig/meetings_app',
-  },
-  {
-    num: '03',
-    category: 'Full Stack',
-    title: 'Aora',
-    description:
-      'A mobile app enabling user authentication, video post creation with thumbnails, titles, and descriptions, plus post search functionality.',
-    stack: ['React Native', 'JavaScript', 'Node.js', 'Appwrite', 'Tailwind CSS'],
-    image: '/projects/project1/images.jpg',
-    github: 'https://github.com/Amanbig/Aora',
-  },
-  {
-    num: '04',
-    category: 'Full Stack',
-    title: 'Gem AI App',
-    description:
-      'A creative AI app for generating songs, stories, and paragraphs, with interactive chat features powered by Gemini API.',
-    stack: ['Dart', 'Flutter', 'Gemini API', 'Firebase'],
-    image: '/projects/project2/homepage.png',
-    github: 'https://github.com/Amanbig/Gemini_app',
-  },
-  {
-    num: '05',
-    category: 'Full Stack',
-    title: 'URL Shortener',
-    description:
-      'A tool for generating custom short URLs, tracking link usage, and managing redirects with a user-friendly dashboard.',
-    stack: ['EJS', 'Node.js', 'Express.js', 'MongoDB'],
-    image: '/projects/project3/image.png',
-    github: 'https://github.com/Amanbig/URL-SHORT',
-  },
-  {
-    num: '06',
-    category: 'Frontend',
-    title: 'Samsung Calculator Clone',
-    description:
-      'A Flutter-based calculator app replicating Samsung’s design, supporting basic and scientific operations with a sleek, intuitive interface.',
-    stack: ['Dart', 'Flutter'],
-    image: '/projects/project4/image2.png',
-    github: 'https://github.com/Amanbig/samsung_calculator_clone',
-  },
+import { portfolioData } from "@/data/portfolio";
 
-];
+const projects = portfolioData.projects;
 
 // Reusable components
 const ProjectHeader = ({ num, category, title }) => (
@@ -116,8 +56,12 @@ const ProjectDetails = ({ description, stack, github }) => (
 );
 
 const ProjectImage = ({ image, title }) => (
-  <div className="relative w-full h-full rounded-xl overflow-hidden">
-    <div className="absolute inset-0 bg-black/20 z-10" />
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    transition={{ duration: 0.5 }}
+    className="relative w-full h-full rounded-xl overflow-hidden cursor-pointer group"
+  >
+    <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/0 transition-all duration-500" />
     <Image
       src={image}
       alt={`${title} screenshot`}
@@ -126,7 +70,7 @@ const ProjectImage = ({ image, title }) => (
       sizes="(max-width: 768px) 100vw, 50vw"
       priority
     />
-  </div>
+  </motion.div>
 );
 
 function Work() {
